@@ -1,6 +1,7 @@
 import React from "react";
 import { MdOutlineDateRange } from "react-icons/md";
 import { FaRegClock } from "react-icons/fa";
+import { EditModal } from "../../../components/Task/EditModal";
 
 export const AddTask = () => {
   return (
@@ -75,7 +76,7 @@ export const AddTask = () => {
               <FaRegClock className="text-[24px]" />
               <input
                 type="time"
-                className="border-none  active:border-none w-full"
+                className="border-none  active:border-none w-full focus:ring-0"
               />
             </div>
           </div>
