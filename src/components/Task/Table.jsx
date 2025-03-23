@@ -8,9 +8,9 @@ export const Table = ({ header, data, showButton, editModal }) => {
         <table className="w-full text-sm text-left rtl:text-right overflow-x-hidden shadow-2xl rounded-2xl">
           <thead className="text-xs text-[#FAF5EF] uppercase bg-[#1C1C1C] rounded-lg">
             <tr>
-              {header.map(i => {
+              {header.map((i, index) => {
                 return (
-                  <th scope="col" className="px-6 py-5">
+                  <th key={index} scope="col" className="px-6 py-5">
                     {i}
                   </th>
                 );

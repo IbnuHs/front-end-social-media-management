@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useRef } from "react";
 import { MdOutlineDateRange } from "react-icons/md";
 import { FaRegClock } from "react-icons/fa";
-import { EditModal } from "../../../components/Task/EditModal";
 
 export const AddTask = () => {
+  const dateRef = useRef(null);
+  const timeRef = useRef(null);
+
+  const dateClick = () => {
+    dateRef.current.click();
+  };
+  const timeClick = () => {
+    timeRef.current.click();
+  };
   return (
     <div className="w-full flex items-center">
       <form
@@ -63,20 +71,24 @@ export const AddTask = () => {
             Deadline
           </label>
           <div className="flex justify-between gap-4">
-            <div class="relative w-full">
+            <div class="relative w-full" onClick={dateClick}>
               <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                 <MdOutlineDateRange className="text-[24px]" />
               </div>
               <input
                 type="date"
+                ref={dateRef}
                 className="rounded-md pl-10 active:outline-none focus:outline-none w-full text-center"
               />
             </div>
-            <div class="relative w-full flex flex-row border items-center px-3 rounded-lg">
-              <FaRegClock className="text-[24px]" />
+            <div class="relative w-full">
+              <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                <FaRegClock className="text-[24px]" />
+              </div>
               <input
                 type="time"
-                className="border-none  active:border-none w-full focus:ring-0"
+                ref={timeRef}
+                className="rounded-md pl-10 active:outline-none focus:outline-none w-full text-center"
               />
             </div>
           </div>
@@ -84,7 +96,7 @@ export const AddTask = () => {
             <button
               type="submit"
               className="px-8 py-1 border rounded-md font-semibold bg-gray-500 text-white cursor-pointer">
-              Add
+              Submit
             </button>
           </div>
         </div>

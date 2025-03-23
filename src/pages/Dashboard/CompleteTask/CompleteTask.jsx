@@ -1,6 +1,7 @@
 import React from "react";
 import { Jumbotron } from "../../../components/Task/Jumbotron";
 import { Table } from "../../../components/Task/Table";
+import { Pagination } from "../../../components/Main/Pagination";
 
 export const CompleteTask = () => {
   let header = [
@@ -59,6 +60,7 @@ export const CompleteTask = () => {
     <div className="flex flex-col w-full px-8 py-6 gap-4">
       <Jumbotron text={"What Content We Completed ?"} />
       <Table header={header} data={data} showButton={false} />
+      <Pagination />
     </div>
   );
 };
