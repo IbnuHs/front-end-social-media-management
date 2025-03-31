@@ -29,7 +29,7 @@ export const AddTask = () => {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5  "
           />
         </div>
-        <div class="mb-5 ">
+        <div className="mb-5 ">
           <label
             htmlFor="countries"
             className="block mb-2 text-  text-gray-600 font-semibold">
@@ -47,7 +47,7 @@ export const AddTask = () => {
             <option value="DE">Germany</option>
           </select>
         </div>
-        <div class="mb-5 ">
+        <div className="mb-5 ">
           <label
             htmlFor="countries"
             className="block mb-2 text-  text-gray-600 font-semibold">
@@ -71,8 +71,8 @@ export const AddTask = () => {
             Deadline
           </label>
           <div className="flex justify-between gap-4">
-            <div class="relative w-full" onClick={dateClick}>
-              <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+            <div className="relative w-full" onClick={dateClick}>
+              <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                 <MdOutlineDateRange className="text-[24px]" />
               </div>
               <input
@@ -81,8 +81,8 @@ export const AddTask = () => {
                 className="rounded-md pl-10 active:outline-none focus:outline-none w-full text-center"
               />
             </div>
-            <div class="relative w-full">
-              <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+            <div className="relative w-full">
+              <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                 <FaRegClock className="text-[24px]" />
               </div>
               <input

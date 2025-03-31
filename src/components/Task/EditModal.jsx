@@ -11,9 +11,7 @@ export const EditModal = ({ isEdit, closeModalEdit }) => {
         <div className="relative p-4 w-full max-w-md max-h-full">
           <div className="relative bg-[#1C1C1C] rounded-lg shadow-sm ">
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
-              <h3 className="text-lg font-semibold text-white">
-                Create New Product
-              </h3>
+              <h3 className="text-lg font-semibold text-white">Edit Task</h3>
               <button
                 type="button"
                 onClick={closeModalEdit}
@@ -39,38 +37,39 @@ export const EditModal = ({ isEdit, closeModalEdit }) => {
                     required=""
                   />
                 </div>
+
                 <div className="col-span-2 sm:col-span-1">
                   <label
-                    htmlFor="price"
+                    htmlFor="platform"
                     className="block mb-2 text-sm font-medium text-white ">
-                    Price
+                    Platform
                   </label>
-                  <input
-                    type="number"
-                    name="price"
-                    id="price"
-                    className="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="$2999"
-                    required=""
-                  />
+                  <select
+                    id="platform"
+                    className="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <option defaultValue={""}>Select Platform</option>
+                    <option value="TV">TikTok</option>
+                    <option value="PC">Instagram</option>
+                    <option value="GA">Youtube</option>
+                    <option value="PH">Linkedin</option>
+                  </select>
                 </div>
                 <div className="col-span-2 sm:col-span-1">
                   <label
                     htmlFor="category"
                     className="block mb-2 text-sm font-medium text-white ">
-                    Category
+                    Author
                   </label>
                   <select
                     id="category"
                     className="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                    <option defaultValue={""}>Select category</option>
-                    <option value="TV">TV/Monitors</option>
-                    <option value="PC">PC</option>
-                    <option value="GA">Gaming/Console</option>
-                    <option value="PH">Phones</option>
+                    <option defaultValue={""}>Select Author</option>
+                    <option value="TV">Rahulk</option>
+                    <option value="PC">Yusman</option>
+                    <option value="GA">Ade</option>
                   </select>
                 </div>
-                <div className="col-span-2">
+                {/* <div className="col-span-2">
                   <label
                     htmlFor="description"
                     className="block mb-2 text-sm font-medium text-white ">
@@ -81,23 +80,15 @@ export const EditModal = ({ isEdit, closeModalEdit }) => {
                     rows="4"
                     className="block p-2.5 w-full text-sm text-white bg-gray-500 rounded-lg border border-gray-300 "
                     placeholder="Write product description here"></textarea>
-                </div>
+                </div> */}
               </div>
-              <button
-                type="submit"
-                className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
-                <svg
-                  className="me-1 -ms-1 w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                    clipRule="evenodd"></path>
-                </svg>
-                Add new product
-              </button>
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="text-white inline-flex items-center bg-gray-700 cursor-pointer font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                  Submit
+                </button>
+              </div>
             </form>
           </div>
         </div>

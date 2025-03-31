@@ -3,17 +3,21 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { BsListTask } from "react-icons/bs";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { MdChecklist } from "react-icons/md";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
+import { FiLogOut } from "react-icons/fi";
 
 export const ListNav = () => {
   const [nav, setNav] = useState(false);
   const setNavbar = () => {
     setNav(!nav);
   };
+  const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.pathname === "/");
+  const logout = () => {
+    navigate("/auth/login");
+  };
   return (
-    <div className="flex -z-10 justify-start lg:z-0">
+    <div className="flex -z-10 justify-start flex-col h-full lg:z-0">
       <button className="lg:hidden" type="button" onClick={setNavbar}>
         <GiHamburgerMenu className="text-white text-2xl" />
       </button>
@@ -83,6 +87,14 @@ export const ListNav = () => {
           </Link>
         </li>
       </ul>
+      <div className="justify-self-end flex items-end justify-start h-full px-6">
+        <button
+          type="button"
+          onClick={logout}
+          className="font-semibold cursor-pointer border px-2 py-1 rounded-md bg-white text-gray-600 flex items-center gap-2">
+          <FiLogOut /> Logout
+        </button>
+      </div>
     </div>
   );
 };
