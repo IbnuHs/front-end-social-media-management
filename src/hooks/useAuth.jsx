@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../utils/api";
 import { useNavigate } from "react-router";
+import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
 
 export const useAuth = () => {
-  // const [user, setUser ] = useState()
+  const [roles, setRoles] = useState();
   const navigate = useNavigate();
 
   const Toaster = Swal.mixin({
@@ -15,6 +16,9 @@ export const useAuth = () => {
     timerProgressBar: true,
   });
 
+  const token = sessionStorage.getItem("token");
+  const decoded = jwtDecode(token);
+  const isAdmin = decoded.roles !== "ADMIN" ? navigate("/auth/login") : "";
   //   const loadingToaster =
   const register = async (name, email, password) => {
     Swal.fire({
@@ -85,5 +89,5 @@ export const useAuth = () => {
     }
   };
 
-  return { register, login };
+  return { register, login, roles, isAdmin };
 };

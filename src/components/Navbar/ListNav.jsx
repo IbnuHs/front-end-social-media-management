@@ -14,6 +14,7 @@ export const ListNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const logout = () => {
+    sessionStorage.removeItem("token");
     navigate("/auth/login");
   };
   return (

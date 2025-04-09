@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
+import { useTask } from "../../hooks/useTask";
 
-export const EditModal = ({ isEdit, closeModalEdit }) => {
+export const EditModal = ({ isEdit, closeModalEdit, id }) => {
+  const [title, setTitle] = useState(null);
+  const [platforms, setplatform] = useState(null);
+  const [author, setauthor] = useState(null);
+  const { editTask, allAuthors, platform } = useTask();
+  // console.log(allAuthors);
+  const onSubmit = e => {
+    e.preventDefault();
+    console.log(id, title, platforms, author);
+    editTask(id, title, platforms, author);
+    closeModalEdit();
+  };
   return (
     <div
       className={`${
@@ -20,7 +32,7 @@ export const EditModal = ({ isEdit, closeModalEdit }) => {
               </button>
             </div>
 
-            <form className="p-4 md:p-5">
+            <form className="p-4 md:p-5" onSubmit={onSubmit}>
               <div className="grid gap-4 mb-4 grid-cols-2">
                 <div className="col-span-2">
                   <label
@@ -32,9 +44,10 @@ export const EditModal = ({ isEdit, closeModalEdit }) => {
                     type="text"
                     name="title"
                     id="title"
+                    onChange={i => setTitle(i.target.value)}
                     className="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Input Title Content"
-                    required=""
+                    required
                   />
                 </div>
 
@@ -46,41 +59,42 @@ export const EditModal = ({ isEdit, closeModalEdit }) => {
                   </label>
                   <select
                     id="platform"
+                    required
+                    onChange={i => setplatform(i.target.value)}
                     className="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option defaultValue={""}>Select Platform</option>
-                    <option value="TV">TikTok</option>
-                    <option value="PC">Instagram</option>
-                    <option value="GA">Youtube</option>
-                    <option value="PH">Linkedin</option>
+                    {platform &&
+                      platform.map((i, index) => {
+                        return (
+                          <option key={index} value={i.id}>
+                            {i.platform}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
                 <div className="col-span-2 sm:col-span-1">
                   <label
-                    htmlFor="category"
+                    htmlFor="author"
                     className="block mb-2 text-sm font-medium text-white ">
                     Author
                   </label>
                   <select
-                    id="category"
+                    id="author"
+                    required
+                    onChange={i => setauthor(i.target.value)}
                     className="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option defaultValue={""}>Select Author</option>
-                    <option value="TV">Rahulk</option>
-                    <option value="PC">Yusman</option>
-                    <option value="GA">Ade</option>
+                    {allAuthors &&
+                      allAuthors.map((i, index) => {
+                        return (
+                          <option key={index} value={i.id}>
+                            {i.name}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
-                {/* <div className="col-span-2">
-                  <label
-                    htmlFor="description"
-                    className="block mb-2 text-sm font-medium text-white ">
-                    Product Description
-                  </label>
-                  <textarea
-                    id="description"
-                    rows="4"
-                    className="block p-2.5 w-full text-sm text-white bg-gray-500 rounded-lg border border-gray-300 "
-                    placeholder="Write product description here"></textarea>
-                </div> */}
               </div>
               <div className="flex justify-center">
                 <button

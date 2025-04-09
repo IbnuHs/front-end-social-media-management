@@ -4,12 +4,23 @@ import { Routes, Route, useNavigate } from "react-router";
 import { ListTask } from "./ListTask/ListTask";
 import { AddTask } from "./AddTask/AddTask";
 import { CompleteTask } from "./CompleteTask/CompleteTask";
+import Swal from "sweetalert2";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Dashboard = () => {
+  // const { decoded } = useAuth();
+  // console.log(decoded);
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
   useEffect(() => {
-    if (!token) navigate("/auth/login");
+    if (!token) {
+      Swal.fire({
+        icon: "warning",
+        title: "Session End",
+        text: "Your session has ended. Please login again.",
+      });
+      navigate("/auth/login");
+    }
   }, [token]);
   return (
     <div className="lg:flex bg-[#FDFCFA] h-screen">

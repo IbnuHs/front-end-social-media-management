@@ -4,6 +4,7 @@ import { Table } from "../../../components/Task/Table";
 import { Jumbotron } from "../../../components/Task/Jumbotron";
 import { EditModal } from "../../../components/Task/EditModal";
 import { content } from "../../../data/data";
+import { useTask } from "../../../hooks/useTask";
 export const ListTask = () => {
   const text = "What Content Must We Make Today?";
   let header = [
@@ -15,7 +16,7 @@ export const ListTask = () => {
     "Status",
     "Action",
   ];
-
+  const { task } = useTask();
   const [editId, setEditId] = useState(null);
   const editModal = id => {
     setEditId(id);
@@ -29,7 +30,7 @@ export const ListTask = () => {
       <Jumbotron text={text} />
       <Table
         header={header}
-        data={content}
+        data={task}
         showButton={true}
         editModal={editModal}
       />

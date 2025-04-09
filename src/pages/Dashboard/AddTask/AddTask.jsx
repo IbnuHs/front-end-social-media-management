@@ -1,21 +1,37 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { MdOutlineDateRange } from "react-icons/md";
 import { FaRegClock } from "react-icons/fa";
+import { useTask } from "../../../hooks/useTask";
 
 export const AddTask = () => {
   const dateRef = useRef(null);
   const timeRef = useRef(null);
+  const [date, setDate] = useState(null);
+  const [time, setTime] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [platforms, setPlatform] = useState(null);
+  const [authors, setAuthor] = useState(null);
+  const { platform, allAuthors, addTask } = useTask();
 
   const dateClick = () => {
     dateRef.current.click();
   };
-  const timeClick = () => {
-    timeRef.current.click();
+  const onSubmit = e => {
+    e.preventDefault();
+    // console.log(title);
+    if (platforms === null || authors === null) {
+      alert("Please Select Platform and Authors");
+      return;
+    }
+    const dueOn = date + " " + time;
+    addTask(platforms, title, dueOn, authors);
+    // console.log(dueOn);
   };
   return (
     <div className="w-full flex items-center">
       <form
         action=""
+        onSubmit={onSubmit}
         className="m-auto w-[60%] border-2 px-14 py-12 rounded-md border-gray-500 shadow-md relative font-Lato text-gray-500 bg-white">
         <div className="mb-5">
           <label
@@ -26,25 +42,34 @@ export const AddTask = () => {
           <input
             type="text"
             id="base-input"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5  "
+            onChange={i => setTitle(i.target.value)}
+            required
+            placeholder="Input Content Title"
+            className="bg-gray-50 border font-Poppins capitalize border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5  "
           />
         </div>
         <div className="mb-5 ">
           <label
-            htmlFor="countries"
+            htmlFor="platform"
             className="block mb-2 text-  text-gray-600 font-semibold">
             Platform
           </label>
           <select
-            id="countries"
+            id="platform"
+            onChange={i => setPlatform(i.target.value)}
+            required
             className="bg-gray-50 border border-gray-300 text-sm text-gray-500 rounded-lg font-semibold focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5  ">
-            <option defaultValue={"Platform"} className="">
+            <option defaultValue={""} className="">
               Select Platform
             </option>
-            <option value="US">United States</option>
-            <option value="CA">Canada</option>
-            <option value="FR">France</option>
-            <option value="DE">Germany</option>
+            {platform &&
+              platform.map((i, index) => {
+                return (
+                  <option key={index} value={i.id}>
+                    {i.platform}
+                  </option>
+                );
+              })}
           </select>
         </div>
         <div className="mb-5 ">
@@ -55,13 +80,21 @@ export const AddTask = () => {
           </label>
           <select
             id="countries"
+            required
+            onChange={i => setAuthor(i.target.value)}
             className="bg-gray-50 border border-gray-300 text-sm text-gray-500 rounded-lg font-semibold focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5  ">
-            <option defaultValue={"Author"} className="">
+            <option defaultValue={""} className="">
               Select Author
             </option>
-            <option value="US">Rahul</option>
-            <option value="CA">Yusman</option>
-            <option value="FR">Ade Gustiyono</option>
+            {allAuthors &&
+              allAuthors.map((i, index) => {
+                // console.log(i.id);
+                return (
+                  <option key={index} value={i.id}>
+                    {i.name}
+                  </option>
+                );
+              })}
           </select>
         </div>
         <div className="mb-5">
@@ -77,7 +110,9 @@ export const AddTask = () => {
               </div>
               <input
                 type="date"
+                required
                 ref={dateRef}
+                onChange={i => setDate(i.target.value)}
                 className="rounded-md pl-10 active:outline-none focus:outline-none w-full text-center"
               />
             </div>
@@ -87,7 +122,9 @@ export const AddTask = () => {
               </div>
               <input
                 type="time"
+                required
                 ref={timeRef}
+                onChange={i => setTime(i.target.value)}
                 className="rounded-md pl-10 active:outline-none focus:outline-none w-full text-center"
               />
             </div>
